@@ -5,7 +5,8 @@ const { double,
     gibberish,
     calculator,
     trainstation,
-    dogHouse
+    dogHouse,
+    shop
 } = require('./src/index.js');
 
 // describe('name of func',()=>{
@@ -164,6 +165,14 @@ describe('dogHouse',()=>{
             expect(result2).toContain(dogToBeAdded2);
         })
     })
+})
+
+describe('shop storage', ()=>{
+        it('return an object with three methods', () => {
+            const result = shop();
+            expect(result).toEqual({ "addStock": expect.any(Function), "sellStock": expect.any(Function), "getRevenue": expect.any(Function) });
+        })
+
 })
 
 

@@ -117,6 +117,24 @@ function dogHouse(){
     return {houseDog,getDogsByLocation}
 }
 
+function shop(){
+    const storage = {};
+    let revenue = 0;
+
+    function addStock(){
+
+    }
+    function sellStock(){
+        
+    }
+    function getRevenue(){
+        
+    }
+
+    return {addStock, sellStock, getRevenue};
+        
+}
+
 module.exports = {
     double,
     increase,
@@ -125,7 +143,8 @@ module.exports = {
     gibberish,
     calculator,
     trainstation,
-    dogHouse
+    dogHouse,
+    shop
 };
 
 
