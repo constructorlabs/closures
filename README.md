@@ -15,7 +15,7 @@
 * `mergeSort` - Create a function which stores an array. Return a closure which accepts a number as an argument. The closure should insert the number into the array in descending order and return the highest number from array
 * `total` - Create a function which stores a `total` number. Return a closure which accepts an array of numbers. The closure should add all the numbers in array, add them to `total` and return the new `total`.
 * `gibberish` - Create a function which stores an empty string. Return a closure which can accept either a string or an array. If it's a string, add it to existing string separated by a space `' '`. If it's an array of strings join them using a space, append to existing string separated by a space and add a fullstop `.` at the end.The closure should return the new resulting string.
-* `calculator` - Create a function which stores a `total` number. It should return an object with 2 methods
+* `calculator` - Create a function which stores a `total` number. 
   * `calculate` should accept 3 parameters: 2 numbers and a string representing an operator `+`, `-`, `*` or `/`. It should perform the operation indicated by the operator add the result to `total`. Return the new `total`
 * `trainstation` - Create a function which stores an array of people. Each person should have a `name` and an `amount` of money, a random integer between 0 and 20. Return an object which has 2 methods
   * `arrive` should accept a person, who has a random amount of money \[0-20\] and add it to array of people
