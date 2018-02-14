@@ -102,6 +102,21 @@ function trainstation() {
     return { arrive, getPeople, giveMoney, trainArrives };
 }
 
+function dogHouse(){
+    const dogs= {}
+    function houseDog(dog){
+        if(dogs.hasOwnProperty(dog.location)){
+            dogs[dog.location].push(dog)
+        }else{
+            dogs[dog.location] = [dog];
+        }
+    }
+    function getDogsByLocation(location){
+        if(dogs[location]) return dogs[location];
+    }
+    return {houseDog,getDogsByLocation}
+}
+
 module.exports = {
     double,
     increase,
@@ -109,7 +124,8 @@ module.exports = {
     total,
     gibberish,
     calculator,
-    trainstation
+    trainstation,
+    dogHouse
 };
 
 

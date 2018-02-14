@@ -4,7 +4,8 @@ const { double,
     total,
     gibberish,
     calculator,
-    trainstation
+    trainstation,
+    dogHouse
 } = require('./src/index.js');
 
 // describe('name of func',()=>{
@@ -132,6 +133,37 @@ describe('trainstation', () => {
 
     })
 
+})
+
+describe('dogHouse',()=>{
+    const {houseDog,getDogsByLocation} = dogHouse();
+    describe('houseDog and getDogsByLocation',()=>{
+        it('it will add the dog received to the appropriate location array in dogs object',()=>{
+            const dogToBeAdded1={
+                name: "Pancho",
+                breed: "Pappilion",
+                location: "Poland"
+            }
+            const dogToBeAdded2={
+                name: "Ginger",
+                breed: "ChowChow",
+                location: "Poland"
+            }
+            const dogToBeAdded3={
+                name: "Bun",
+                breed: "Sausage Dog",
+                location: "London"
+            }
+            houseDog(dogToBeAdded1);
+            houseDog(dogToBeAdded2);
+            houseDog(dogToBeAdded3);
+            const result = getDogsByLocation(dogToBeAdded3.location);
+            expect(result).toContain(dogToBeAdded3);
+            const result2 = getDogsByLocation(dogToBeAdded1.location);
+            expect(result2).toContain(dogToBeAdded1);
+            expect(result2).toContain(dogToBeAdded2);
+        })
+    })
 })
 
 
