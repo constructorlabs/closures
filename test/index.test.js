@@ -35,3 +35,27 @@ test('Gibberish', function() {
 	const result2 = gibberish(['woof', 'boom', 'cafetiere']);
 	expect(result2).toEqual(expected2);
 });
+
+test ("Calculator", function(){
+	let calculator = functions.calculatorMaker();
+
+	const resultAdd = calculator(3, "+", 2);
+	expect(resultAdd).toBe(5);
+	// running total after add is 5;
+
+	const resultSubtract = calculator(4, "-", 2);
+	expect(resultSubtract).toBe(7);
+	// running total after subtract is 7 (5+2)
+
+	const resultMultiply = calculator(2, "*", 6);
+	expect(resultMultiply).toBe(19);
+	// running total after multiply is 19 (7+12)
+
+	const resultDivide = calculator(20, "/", 10);
+	expect(resultDivide).toBe(21);
+	//running total after divide is 21 (19+2)
+
+	const resultWrong = calculator (50, "!", 23);
+	expect(resultWrong).toBe(21);
+	//as resultWrong does nothing to the total, the total is still 21
+})

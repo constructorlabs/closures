@@ -82,3 +82,32 @@ function gibberishMaker () {
 }
 
 module.exports.gibberishMaker = gibberishMaker;
+
+function calculatorMaker () {
+	let total = 0;
+
+	function calculator(nr1, operator, nr2){
+		switch (operator) {
+			case "+":
+				total += (nr1 + nr2);
+				break;
+			case "-":
+				total += (nr1 - nr2);
+				break;
+			case "*":
+				total += (nr1 * nr2);
+				break;
+			case "/":
+				total += (nr1 / nr2);
+				break;
+			default:
+				console.log("unknown operator");
+		}
+
+		return total;
+	}
+
+	return calculator;
+}
+
+module.exports.calculatorMaker = calculatorMaker;
