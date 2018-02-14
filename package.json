@@ -1,7 +1,7 @@
 {
   "name": "closures",
   "version": "1.0.0",
-  "description": "",
+  "description": "* Fork and clone this repo\r * Work in pairs\r * Take turns in implementing one closure each.\r * Write tests before implementing each closure\r * Use pure functions where possible",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -10,5 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "jest": "^22.3.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sm-school/closures.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sm-school/closures/issues"
+  },
+  "homepage": "https://github.com/sm-school/closures#readme"
 }
