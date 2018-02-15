@@ -151,3 +151,96 @@ function stationMaker(){
 }
 
 module.exports.stationMaker = stationMaker;
+
+function dogHomeMaker (){
+	let house = {
+		room1: [
+			{
+				name : "Fido",
+				breed: "Pomeranian",
+				colour: "black",
+				location: "room1"
+			}
+		],
+		room2: [
+			{
+				name: "Rex",
+				breed: "sausage dog",
+				colour: "brown",
+				location: "room2"
+			}
+		]
+	};
+
+	const methods = {
+		houseDog: function(dogObject){
+			let dogLocation = dogObject.location;
+			if (!house.hasOwnProperty(dogLocation)){
+				house[dogLocation] = [];
+			}
+
+			house[dogLocation].push(dogObject);
+		},
+		getDogsByLocation: function(location){
+			if (house.hasOwnProperty(location)){
+				return house[location];
+			}
+			else {
+				return "No such location";
+			}
+		}
+	}
+
+	return methods;
+
+}
+
+module.exports.dogHomeMaker = dogHomeMaker;
+
+function shop (initialStock, revenue) {
+	let storage = {
+		stock : {}
+	};
+
+	Object.keys(initialStock).forEach(item => {
+		let stockItem = initialStock[item];
+		storage.stock[stockItem.name] = stockItem;
+	});
+
+	storage.revenue = revenue ? revenue : 0;
+
+	const methods = {
+		inventory () {
+			return storage;
+		},
+		addStock (newStockItems) {
+			newStockItems.forEach( newItem => {
+				storeItem(newItem);
+			});
+		}
+	}
+
+	function storeItem (item) {
+		let name = item.name;
+		let incomingQuantity = item.quantity;
+		let newPrice = item.price;
+
+		if (storage.stock[name]) {
+			let itemStock = storage.stock[name];
+			let currentPrice = itemStock.price;
+			let newQuantity = itemStock.quantity + incomingQuantity;
+
+			let updatedPrice = (currentPrice + newPrice) / 2;
+
+			itemStock.price = updatedPrice;
+			itemStock.quantity = newQuantity;
+
+		} else {
+			storage.stock[name] = item;
+		}
+	}
+
+	return methods;
+}
+
+module.exports.shop = shop;

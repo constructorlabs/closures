@@ -111,3 +111,204 @@ test('Passengers leave on a train', function() {
 	station.trainArrives();
 	expect(station.getPeople()).toEqual(expectedRemainingPeople);
 });
+
+test('Dog kennel placement', function(){
+	let starterDogGroup = {
+		room1: [
+			{
+				name : "Fido",
+				breed: "Pomeranian",
+				colour: "black",
+				location: "room1"
+			}
+		],
+		room2: [
+			{
+				name: "Rex",
+				breed: "sausage dog",
+				colour: "brown",
+				location: "room2"
+			}
+		]
+	};
+
+	let incomingDogA = {
+		name: "Pluto",
+		breed: "Alsatian",
+		colour: "white",
+		location: "room2"
+	};
+
+	let incomingDogB = {
+		name: "Tramp",
+		breed: "mutt",
+		colour: "brown and black",
+		location: "room3"
+	};
+
+	let finishDogGroup = {
+		room1: [
+			{
+				name : "Fido",
+				breed: "Pomeranian",
+				colour: "black",
+				location: "room1"
+			}
+		],
+		room2: [
+			{
+				name: "Rex",
+				breed: "sausage dog",
+				colour: "brown",
+				location: "room2"
+			},
+			{
+				name: "Pluto",
+				breed: "Alsatian",
+				colour: "white",
+				location: "room2"
+			}
+		],
+		room3: [
+			{
+				name: "Tramp",
+				breed: "mutt",
+				colour: "brown and black",
+				location: "room3"
+			}
+		]
+	};
+
+	let kennel = functions.dogHomeMaker();
+
+	kennel.houseDog(incomingDogA);
+	kennel.houseDog(incomingDogB);
+
+	let room3dogs = kennel.getDogsByLocation("room3");
+
+	expect(room3dogs).toEqual([incomingDogB]);
+
+	let room4dogs = kennel.getDogsByLocation("room4");
+
+	expect(room4dogs).toEqual("No such location");
+
+	expect(kennel.getDogsByLocation("room2")).toEqual(finishDogGroup.room2);
+});
+
+test('Dogs in location', function() {
+	let expectedDogs = [
+		{
+			name: "Rex",
+			breed: "sausage dog",
+			colour: "brown",
+			location: "room2"
+		}
+	];
+
+	let kennel = functions.dogHomeMaker();
+	expect(kennel.getDogsByLocation('room2')).toEqual(expectedDogs);
+});
+
+test.only('Create a shop', function() {
+	let expectedShopContents = {
+		stock : {
+			hat : {
+				name : 'hat',
+				quantity : 5,
+				price : 10
+			},
+			gloves : {
+				name : 'gloves',
+				quantity : 10,
+				price : 5
+			}
+		},
+		revenue : 100
+	}
+
+	let shop = functions.shop(
+		expectedShopContents.stock, expectedShopContents.revenue
+	);
+
+	let newShopInventory = shop.inventory();
+
+	expect(newShopInventory).toEqual(expectedShopContents);
+});
+
+test.only('Add new stock type', function() {
+	let expectedShopContents = {
+		stock : {
+			hat : {
+				name : 'hat',
+				quantity : 5,
+				price : 10
+			},
+			gloves : {
+				name : 'gloves',
+				quantity : 10,
+				price : 5
+			}
+		},
+		revenue : 100
+	};
+
+	let shop = functions.shop(
+		expectedShopContents.stock, expectedShopContents.revenue
+	);
+
+	let newItems = [
+		{
+			name : 'shoes',
+			quantity : 15,
+			price : 12,
+		}
+	];
+
+	shop.addStock(newItems);
+
+	expectedShopContents.stock.shoes = newItems[0];
+
+	let newShopInventory = shop.inventory();
+
+	expect(newShopInventory).toEqual(expectedShopContents);
+});
+
+test.only('Add more of existing stock', function() {
+	let expectedShopContents = {
+		stock : {
+			hat : {
+				name : 'hat',
+				quantity : 5,
+				price : 10
+			},
+			gloves : {
+				name : 'gloves',
+				quantity : 10,
+				price : 5
+			}
+		},
+		revenue : 100
+	};
+
+	let shop = functions.shop(
+		expectedShopContents.stock, expectedShopContents.revenue
+	);
+
+	let additionalStock = [
+		{
+			name : 'hat',
+			quantity : 10,
+			price : 20,
+		},
+	];
+
+	shop.addStock(additionalStock);
+
+	expectedShopContents.stock.hat = {
+		name : 'hat',
+		quantity : 15,
+		price : 15
+	};
+
+	expect(shop.inventory()).toEqual(expectedShopContents);
+});
