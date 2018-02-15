@@ -235,7 +235,7 @@ test('Create a shop', function() {
 	expect(newShopInventory).toEqual(expectedShopContents);
 });
 
-test.only('Add new stock type', function() {
+test('Add new stock type', function() {
 	let expectedShopContents = {
 		stock : {
 			hat : {
