@@ -209,7 +209,7 @@ test('Dogs in location', function() {
 	expect(kennel.getDogsByLocation('room2')).toEqual(expectedDogs);
 });
 
-test.only('Create a shop', function() {
+test('Create a shop', function() {
 	let expectedShopContents = {
 		stock : {
 			hat : {
@@ -273,7 +273,7 @@ test.only('Add new stock type', function() {
 	expect(newShopInventory).toEqual(expectedShopContents);
 });
 
-test.only('Add more of existing stock', function() {
+test('Add more of existing stock', function() {
 	let expectedShopContents = {
 		stock : {
 			hat : {
@@ -313,7 +313,7 @@ test.only('Add more of existing stock', function() {
 	expect(shop.inventory()).toEqual(expectedShopContents);
 });
 
-test.only('Sell stock and get revenue', function() {
+test('Sell stock and get revenue', function() {
 	let expectedShopContents = {
 		stock : {
 			hat : {
