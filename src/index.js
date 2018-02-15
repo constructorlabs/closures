@@ -102,37 +102,76 @@ function trainstation() {
     return { arrive, getPeople, giveMoney, trainArrives };
 }
 
-function dogHouse(){
-    const dogs= {}
-    function houseDog(dog){
-        if(dogs.hasOwnProperty(dog.location)){
+function dogHouse() {
+    const dogs = {}
+    function houseDog(dog) {
+        if (dogs.hasOwnProperty(dog.location)) {
             dogs[dog.location].push(dog)
-        }else{
+        } else {
             dogs[dog.location] = [dog];
         }
     }
-    function getDogsByLocation(location){
-        if(dogs[location]) return dogs[location];
+    function getDogsByLocation(location) {
+        if (dogs[location]) return dogs[location];
     }
-    return {houseDog,getDogsByLocation}
+    return { houseDog, getDogsByLocation }
 }
 
-function shop(){
+function shop() {
+
     const storage = {};
     let revenue = 0;
 
-    function addStock(){
+    //we create a fake object to see what would this function receive
+    // let arr= [{name:"jjj",quantity:10, price:100},{name:"jjj",quantity:"10", price:"100"}];
+    function addStock(arr) {
+        arr.forEach(function (stock) {
+            if (storage.hasOwnProperty(stock.name)) {
+                let oldQuantity = storage[stock.name].quantity;
+                let oldPrice = storage[stock.name].price;
+
+                storage[stock.name].quantity += stock.quantity;
+
+                if (storage[stock.name].price != stock.price) {
+                    let totalValue = oldQuantity * oldPrice + stock.price * stock.quantity
+                    let totalQuantity = oldQuantity + stock.quantity;
+                    let average = totalValue / totalQuantity;
+                    storage[stock.name].price = average;
+                }
+            }else {
+                storage[stock.name] = { quantity: stock.quantity, price: stock.price };
+            }
+        })
+
+
 
     }
-    function sellStock(){
-        
+    function sellStock(arr) {
+        //define an array with stock items to fill
+        const arrayOfSoldStock = [];
+
+        arr.forEach(function (stock) {
+            // if we have this stock
+            if (storage.hasOwnProperty(stock.name)){
+                //check how many you can sell
+                let howManyYouCanSell = Math.min(stock.quantity, storage[stock.name].quantity);
+                //reduce the quantity of items in storage by amount we are going to sell
+                storage[stock.name].quantity -= howManyYouCanSell;
+                //add the revenue from each order to the total total revenue
+                let revenueFromSell = (stock.price - storage[stock.name].price) * howManyYouCanSell;
+                revenue += revenueFromSell 
+                //if we sell the item fill the empty array with  a new obj
+                arrayOfSoldStock.push({name:stock.name,quantity:howManyYouCanSell, price: stock.price})
+            }
+        })
+        //return an array with obj sold
+        return arrayOfSoldStock;
     }
-    function getRevenue(){
-        
+    function getRevenue() {
+        return revenue;
     }
 
-    return {addStock, sellStock, getRevenue};
-        
+    return { addStock, sellStock, getRevenue };
 }
 
 module.exports = {

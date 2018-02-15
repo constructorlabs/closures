@@ -172,6 +172,34 @@ describe('shop storage', ()=>{
             const result = shop();
             expect(result).toEqual({ "addStock": expect.any(Function), "sellStock": expect.any(Function), "getRevenue": expect.any(Function) });
         })
+        const { addStock, sellStock, getRevenue} = shop();
+
+    describe('get revenue function', ()=>{
+        it('returns the total revenue',()=>{
+            const result = getRevenue();
+            expect(result).toBe(0);
+        })
+    })
+    describe('Add, Sell, Check revenue', ()=>{
+        it('adds stocks, sell stocks return sold items, get total revenue',()=>{
+            const stocksToAdd = [{name:"apple", quantity:10, price:30},{name:"google", quantity:5, price:120}]
+            const extraStocksToAdd = [{name:"google", quantity:5, price:20}]
+            addStock(stocksToAdd);
+            addStock(extraStocksToAdd);
+
+
+            const stockToSell = [{name:"google", quantity:20, price:80},{name:"not another google", quantity:7, price:50}];
+            const result = sellStock(stockToSell);
+            expect(result).toEqual([{name:"google", quantity:10, price:80}]);
+
+            const totalRevenue = getRevenue();
+            expect(totalRevenue).toBe(100);
+        })
+    })
+
+
+
+
 
 })
 
