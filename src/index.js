@@ -111,3 +111,43 @@ function calculatorMaker () {
 }
 
 module.exports.calculatorMaker = calculatorMaker;
+
+function stationMaker(){
+	let crowd = [
+		{ name : 'Adam', amount : 10 },
+		{ name : 'Bella', amount : 15 },
+		{ name : 'Charles', amount: 20 },
+		{ name : 'Denise', amount: 22 }
+	];
+
+	let randomIndex = Math.floor(Math.random() * crowd.length);
+	let randomMoney = Math.floor(Math.random() * 10);
+
+	const methods = {
+		arrive(personObject) {
+			crowd.push(personObject);
+			return crowd;
+		},
+		getPeople() {
+			return crowd;
+		},
+		randoms() {
+			return [randomIndex, randomMoney];
+		},
+		giveMoney() {
+			crowd[randomIndex].amount = crowd[randomIndex].amount + randomMoney;
+			return crowd[randomIndex];
+
+			randomIndex = Math.floor(Math.random() * crowd.length);
+			randomMoney = Math.floor(Math.random() * 10);
+		},
+		trainArrives() {
+			crowd = crowd.filter(person => person.money < 20);
+			return crowd;
+		}
+	};
+
+	return methods;
+}
+
+module.exports.stationMaker = stationMaker;

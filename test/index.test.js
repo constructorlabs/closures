@@ -59,3 +59,55 @@ test ("Calculator", function(){
 	expect(resultWrong).toBe(21);
 	//as resultWrong does nothing to the total, the total is still 21
 })
+
+let expectedPeople = [
+	{ name : 'Adam', amount : 10 },
+	{ name : 'Bella', amount : 15 },
+	{ name : 'Charles', amount: 20 },
+	{ name : 'Denise', amount: 22 }
+];
+
+test('Railway station has certain people', function() {
+	let station = functions.stationMaker();
+	let stationPeople = station.getPeople();
+
+	expect(stationPeople).toEqual(expectedPeople);
+});
+
+test('Person arrives at railway station', function() {
+	let station = functions.stationMaker();
+
+	let newPerson = { name : 'Eric', amount: 7 };
+	station.arrive(newPerson);
+	expectedPeople.push(newPerson);
+	stationPeople = station.getPeople();
+
+	expect(stationPeople).toEqual(expectedPeople);
+});
+
+test('Give money to a person', function() {
+	let station = functions.stationMaker();
+	stationPeople = station.getPeople();
+
+	let [randomIndex, randomAmount] = station.randoms();
+
+	let randomPerson = stationPeople[randomIndex];
+	let personComparison = JSON.parse(JSON.stringify(randomPerson));
+	personComparison.amount += randomAmount;
+
+	let expectedDonor = station.giveMoney();
+
+	expect(personComparison).toEqual(expectedDonor);
+});
+
+test('Passengers leave on a train', function() {
+	let station = functions.stationMaker();
+	let expectedRemainingPeople = JSON.parse(JSON.stringify(station.getPeople()));
+
+	expectedRemainingPeople = expectedRemainingPeople.filter(
+		person => person.money < 20
+	);
+
+	station.trainArrives();
+	expect(station.getPeople()).toEqual(expectedRemainingPeople);
+});
