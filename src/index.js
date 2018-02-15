@@ -217,6 +217,37 @@ function shop (initialStock, revenue) {
 			newStockItems.forEach( newItem => {
 				storeItem(newItem);
 			});
+		},
+		sellStock (stockRequired) {
+			let soldItems = [];
+
+			stockRequired.forEach( item => {
+				let itemName = item.name;
+				let itemPrice = storage.stock[itemName].price;
+				let requiredQuantity = item.quantity;
+
+				let availableQuantity = storage.stock[itemName].quantity;
+
+				let saleQuantity = requiredQuantity <= availableQuantity
+					? requiredQuantity
+					: availableQuantity;
+
+				let saleValue = itemPrice * saleQuantity;
+				storage.revenue += saleValue;
+
+				storage.stock[itemName].quantity -= saleQuantity;
+
+				soldItems.push({
+					name : itemName,
+					quantity : saleQuantity,
+					price : saleValue
+				});
+			});
+
+			return soldItems;
+		},
+		getRevenue () {
+			return storage.revenue;
 		}
 	}
 

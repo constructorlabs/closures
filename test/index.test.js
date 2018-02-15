@@ -312,3 +312,53 @@ test.only('Add more of existing stock', function() {
 
 	expect(shop.inventory()).toEqual(expectedShopContents);
 });
+
+test.only('Sell stock and get revenue', function() {
+	let expectedShopContents = {
+		stock : {
+			hat : {
+				name : 'hat',
+				quantity : 5,
+				price : 10
+			},
+			gloves : {
+				name : 'gloves',
+				quantity : 10,
+				price : 5
+			}
+		},
+		revenue : 100
+	};
+
+	let shop = functions.shop(
+		expectedShopContents.stock, expectedShopContents.revenue
+	);
+
+	let itemsRequired = [
+		{
+			name : 'hat',
+			quantity : 6
+		},
+		{
+			name: 'gloves',
+			quantity : 5
+		}
+	];
+
+	let expectedItemsSold = [
+		{
+			name : 'hat',
+			quantity : 5,
+			price : 50
+		},
+		{
+			name: 'gloves',
+			quantity : 5,
+			price : 25
+		}
+	];
+
+	expect(shop.sellStock(itemsRequired)).toEqual(expectedItemsSold);
+
+	expect(shop.getRevenue()).toBe(175);
+});
