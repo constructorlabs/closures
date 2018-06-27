@@ -25,3 +25,21 @@ function double() {
 }
 
 exports.double = double;
+
+// Create a function which receives and stores total number. 
+// Return an inner function which accepts an array of numbers. 
+// The inner function should add all the numbers in array, 
+// add them to total and return the new
+
+function total(number) {
+  let total = number;
+  function inner(arr) {
+    total = arr.reduce((acc, item) => {
+      return acc + item;
+    }, total);
+    return total;
+  }
+  return inner;
+}
+exports.total = total;
+
