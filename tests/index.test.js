@@ -1,4 +1,4 @@
-const { increase, double, total, gibberish, mergeSort, calculator } = require('../src/index.js');
+const { increase, double, total, gibberish, mergeSort, calculator, dogHome } = require('../src/index.js');
 
 test('increase', function () {
   const arg = 10;
@@ -42,11 +42,65 @@ test('mergeSort', function () {
   expect(inner(40)).toBe(expected2);
 })
 
-test.only('calculator', function () {
-
+test('calculator', function () {
   const inner = calculator();
   const expected1 = 2;
   const expected2 = 9;
   expect(inner(1, 1, "+")).toBe(expected1);
   expect(inner(19, 10, "-")).toBe(expected2);
+})
+
+test.only('dogHome', function () {
+  const { houseDog, getDogsByLocation } = dogHome();
+  const expected1 = {
+    Miami: [{
+      "name": "Bobby",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    }]
+  };
+  const expected2 = {
+    Miami: [{
+      "name": "Bobby",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    },
+    {
+      "name": "Bobby 2",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    }]
+  };
+
+  const expected3 = [{
+    "name": "Bobby",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  },
+  {
+    "name": "Bobby 2",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  }];
+
+  expect(houseDog({
+    "name": "Bobby",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  })).toEqual(expected1);
+
+  expect(houseDog({
+    "name": "Bobby 2",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  })).toEqual(expected2);
+
+  expect(getDogsByLocation("Miami")).toEqual(expected3);
 })

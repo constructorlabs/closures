@@ -117,3 +117,29 @@ function calculator() {
   return inner;
 }
 exports.calculator = calculator;
+
+
+// Create a function which stores an object. 
+// This object will have keys representing locations and
+// an array as values. Return an object with 2 methods
+
+function dogHome() {
+  const dogs = {};
+
+  return {
+    houseDog(dog) {
+      if (dogs[dog.location]) {
+        dogs[dog.location].push(dog);
+      } else {
+        dogs[dog.location] = [dog];
+      }
+      return dogs;
+    },
+
+    getDogsByLocation(location) {
+      return dogs[location];
+    }
+  }
+}
+
+exports.dogHome = dogHome;
