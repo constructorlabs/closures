@@ -43,3 +43,27 @@ function total(number) {
 }
 exports.total = total;
 
+
+// Create a function which stores an empty string. 
+// Return an inner function which can accept either a string or an array of strings. 
+// If it's a string, add it to existing string separated by a space ' '. 
+// If it's an array of strings join them using a space, append to existing string 
+// separated by a space and add a fullstop . at the end. 
+// The inner function should return the new resulting string.
+
+function gibberish() {
+  let str = "";
+  function inner(item) {
+    if (typeof (item) === "string") {
+      return str = str + ' ' + item;
+    } else if (Array.isArray(item)) {
+      return str += item.join(" ") + ".";
+    } else {
+      return "Wrong type of parameter";
+    }
+  }
+
+  return inner;
+}
+
+exports.gibberish = gibberish;
