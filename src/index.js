@@ -84,4 +84,36 @@ function mergeSort() {
   return inner;
 }
 
-exports.mergeSort = mergeSort
+exports.mergeSort = mergeSort;
+
+//Create a function which stores a total number. 
+// It should return an inner function which should 
+// accept 3 parameters: 2 numbers and a string representing 
+// an operator +, -, * or /. It should perform the operation 
+// indicated by the operator add the result to total. Return the new total.
+
+function calculator() {
+  let total = 0;
+  function inner(num1, num2, operator) {
+    switch (operator) {
+      case "+":
+        total = num1 + num2;
+        break;
+      case "-":
+        total = num1 - num2;
+        break;
+      case "*":
+        total = num1 * num2;
+        break;
+      case "/":
+        total = num1 / num2;
+        break;
+      default:
+        console.log("wrong operator");
+        break;
+    }
+    return total;
+  }
+  return inner;
+}
+exports.calculator = calculator;
