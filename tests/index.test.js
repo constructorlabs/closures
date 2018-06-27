@@ -32,3 +32,12 @@ test('gibberish', function () {
   expect(inner(["Buna", "amic"])).toBe(expected1);
   expect(inner("Hola")).toBe(expected2);
 })
+
+test('mergeSort', function () {
+
+  const inner = mergeSort();
+  const expected1 = 20;
+  const expected2 = 40;
+  expect(inner(20)).toBe(expected1);
+  expect(inner(40)).toBe(expected2);
+})

@@ -67,3 +67,21 @@ function gibberish() {
 }
 
 exports.gibberish = gibberish;
+
+// Create a function which stores an empty array. 
+// Return an inner function which accepts a number as an argument. 
+// The inner function should insert the number into the array in 
+// descending order and return the highest number from array.
+
+function mergeSort() {
+  let arry = [];
+  function inner(num) {
+    const result = arry.concat(num).sort(function (a, b) {
+      return a - b;
+    })
+    return result[result.length - 1];
+  }
+  return inner;
+}
+
+exports.mergeSort = mergeSort
