@@ -1,11 +1,106 @@
-const { increase } = require('../src/index.js');
+const { increase, double, total, gibberish, mergeSort, calculator, dogHome } = require('../src/index.js');
 
-test('increase', function(){
+test('increase', function () {
   const arg = 10;
   const inner = increase();
   const result = inner(arg);
-
-  const expected = 12;
-
+  const expected = 13;
   expect(result).toBe(expected);
 });
+
+
+test('double', function () {
+  const inner = double();
+  const result = inner(6);
+  const expected = 12;
+  expect(result).toBe(expected);
+})
+
+test('total', function () {
+  const number = 10;
+  const array = [1, 2, 3];
+  const inner = total(number);
+  const result = inner(array);
+  const expected = 16;
+  expect(result).toBe(expected);
+})
+
+test('gibberish', function () {
+  const inner = gibberish();
+  const expected1 = "Buna amic.";
+  const expected2 = "Buna amic. Hola";
+  expect(inner(["Buna", "amic"])).toBe(expected1);
+  expect(inner("Hola")).toBe(expected2);
+})
+
+test('mergeSort', function () {
+
+  const inner = mergeSort();
+  const expected1 = 20;
+  const expected2 = 40;
+  expect(inner(20)).toBe(expected1);
+  expect(inner(40)).toBe(expected2);
+})
+
+test('calculator', function () {
+  const inner = calculator();
+  const expected1 = 2;
+  const expected2 = 9;
+  expect(inner(1, 1, "+")).toBe(expected1);
+  expect(inner(19, 10, "-")).toBe(expected2);
+})
+
+test.only('dogHome', function () {
+  const { houseDog, getDogsByLocation } = dogHome();
+  const expected1 = {
+    Miami: [{
+      "name": "Bobby",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    }]
+  };
+  const expected2 = {
+    Miami: [{
+      "name": "Bobby",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    },
+    {
+      "name": "Bobby 2",
+      "breed": "Dalmatian",
+      "colour": "Black",
+      "location": "Miami"
+    }]
+  };
+
+  const expected3 = [{
+    "name": "Bobby",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  },
+  {
+    "name": "Bobby 2",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  }];
+
+  expect(houseDog({
+    "name": "Bobby",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  })).toEqual(expected1);
+
+  expect(houseDog({
+    "name": "Bobby 2",
+    "breed": "Dalmatian",
+    "colour": "Black",
+    "location": "Miami"
+  })).toEqual(expected2);
+
+  expect(getDogsByLocation("Miami")).toEqual(expected3);
+})
